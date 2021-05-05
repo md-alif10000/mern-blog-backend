@@ -11,8 +11,12 @@ connect();
 
 // App config
 app.use(express.json());
-app.use(cors())
 app.use("/public", express.static(path.join(__dirname, "uploads")));
+app.use(cors());
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	next();
+});
 
 // Router import
 const userRouter = require("./routes/userRoutes");
